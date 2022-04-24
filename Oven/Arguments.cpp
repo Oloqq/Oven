@@ -7,10 +7,8 @@ Arguments::Arguments(int argc, char** argv)
 {
 	CLI::App app{ "Bua oven" };
 
-	string filename = "default";
-	app.add_option("-f,--file", filename, "A help string");
-	int bruh = 1;
-	app.add_option("-d,--dddddupa", bruh, "chlopie");
+	app.add_option("-f,--tempfile", filename, "A help string");
+	app.add_option("-d,--tempint", bruh, "chlopie");
 
 	CLI::App* init = app.add_subcommand("init", "Initialize a new project");
 	

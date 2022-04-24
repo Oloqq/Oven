@@ -67,3 +67,19 @@ inline char** make_argv(const string& line, int& count)
 
 	return argv;
 }
+
+inline string environment(const string& variable_name)
+{
+	char* buffer = nullptr;
+	size_t size;
+	_dupenv_s(&buffer, &size, variable_name.c_str());
+	if (size == 0) {
+		delete[] buffer;
+		return string("");
+	}
+	else {
+		string ret(buffer);
+		delete[] buffer;
+		return ret;
+	}
+}

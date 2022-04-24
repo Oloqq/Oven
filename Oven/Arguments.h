@@ -9,8 +9,8 @@ public:
 	Arguments(int argc, char** argv);
 
 
-	string filename;
-	int bruh;
+	string filename = "";
+	int bruh = 0;
 };
 
  
