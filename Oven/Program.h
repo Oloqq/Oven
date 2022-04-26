@@ -5,10 +5,6 @@
 class Program
 {
 public:
-	Program(const Arguments& args,
-		    const filesystem::path home);
-
-private:
-	const filesystem::path home;
+	Program(const Arguments& args);
 };
 

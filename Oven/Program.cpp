@@ -5,12 +5,10 @@
 #include "VerbRun.h"
 #include <fstream>
 
-Program::Program(const Arguments& args,
-				 const filesystem::path home) :
-	home{home}
+Program::Program(const Arguments& args)
 {
 	if (args.init->parsed()) {
-		verb::init(args);
+		verb::Init a(args);
 	}
 
 	if (args.run->parsed()) {

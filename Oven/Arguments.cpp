@@ -5,18 +5,21 @@
 
 Arguments::Arguments(int argc, char** argv)
 {	
+	get_home_dir();
+	
 	CLI::App app{ "Bua oven" };
 
 	working_directory = filesystem::current_path();
 
-	//app.add_option("-f,--tempfile", filename, "A help string");
-	//app.add_option("-d,--tempint", bruh, "chlopie");
-
-	run = app.add_subcommand("run",  "Run");
-	init = 
-		app.add_subcommand("init", "Initialize a new project")
-		->excludes(run);
+	// Init
+	init =
+		app.add_subcommand("init", "Initialize a new project");
+	init->add_option("-t,--template", template_name, "Template of the project");
 	
+	// Run
+	run = app.add_subcommand("run",  "Run")
+		->excludes(init);
+
 	try {
 		(app).parse((argc), (argv));
 	}
@@ -24,4 +27,13 @@ Arguments::Arguments(int argc, char** argv)
 		app.exit(e);
 		throw e;
 	}
+}
+
+void Arguments::get_home_dir()
+{
+	string bua_path_s = environment("BUA_PATH");
+	if (bua_path_s == "") {
+		throw EnvironmentVariableError("BUA_PATH environment variable not found");
+	}
+	home_directory = filesystem::path(bua_path_s);
 }
