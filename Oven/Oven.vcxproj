@@ -140,13 +140,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArgumentParseError.cpp" />
     <ClCompile Include="Arguments.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArgumentParseError.h" />
     <ClInclude Include="Arguments.h" />
     <ClInclude Include="CLI11.hpp" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
