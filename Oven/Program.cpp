@@ -2,6 +2,7 @@
 #include "json.hpp"
 #include "utils.h"
 #include "VerbInit.h"
+#include "VerbRun.h"
 #include <fstream>
 
 Program::Program(const Arguments& args,
@@ -10,6 +11,10 @@ Program::Program(const Arguments& args,
 {
 	if (args.init->parsed()) {
 		verb::init(args);
+	}
+
+	if (args.run->parsed()) {
+		verb::run(args);
 	}
 	
 	//// TODO load in separate function / make a Configuration class

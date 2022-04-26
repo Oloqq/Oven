@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const string line = "Oven.exe init";
+const string line = "Oven.exe run";
 int targc;
 char **targv = make_argv(line, targc);
 

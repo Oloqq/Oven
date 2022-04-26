@@ -27,6 +27,9 @@
     <ClCompile Include="VerbInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VerbRun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLI11.hpp">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VerbInit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VerbRun.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

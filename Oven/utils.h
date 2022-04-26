@@ -6,35 +6,33 @@
 #include <algorithm>
 #include <typeinfo>
 
-using namespace std;
-
 template <typename T>
 inline void print_one(const T& t)
 {
-	cout << t;
+	std::cout << t;
 }
 
 inline void print_one(const bool t)
 {
-	cout << (t ? "True" : "False");
+	std::cout << (t ? "True" : "False");
 }
 
 template <typename T>
 inline void print(const T& t)
 {
 	print_one(t);
-	cout << endl;
+	std::cout << std::endl;
 }
 
 template<typename T, typename... Args>
 inline void print(const T& t, Args... args)
 {
 	print_one(t);
-	cout << " ";
+	std::cout << " ";
 	print(args...);
 }
 
-inline vector<string> get_tokens(const string& line)
+inline std::vector<std::string> get_tokens(const std::string& line)
 {
 	std::vector<std::string> vec;
 	std::string delimiter = " ";
@@ -54,9 +52,9 @@ inline vector<string> get_tokens(const string& line)
 	return vec;
 }
 
-inline char** make_argv(const string& line, int& count)
+inline char** make_argv(const std::string& line, int& count)
 {
-	vector<string> tokens = get_tokens(line);
+	std::vector<std::string> tokens = get_tokens(line);
 	count = tokens.size();
 	char** argv = new char* [tokens.size()];
 	
@@ -68,17 +66,17 @@ inline char** make_argv(const string& line, int& count)
 	return argv;
 }
 
-inline string environment(const string& variable_name)
+inline std::string environment(const std::string& variable_name)
 {
 	char* buffer = nullptr;
 	size_t size;
 	_dupenv_s(&buffer, &size, variable_name.c_str());
 	if (size == 0) {
 		delete[] buffer;
-		return string("");
+		return std::string("");
 	}
 	else {
-		string ret(buffer);
+		std::string ret(buffer);
 		delete[] buffer;
 		return ret;
 	}
