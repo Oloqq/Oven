@@ -1,13 +1,12 @@
 #include "utils.h"
 #include "Program.h"
-#include "CLI11.hpp"
 #include "Arguments.h"
 #include <cstdlib>
 #include <filesystem>
 
 using namespace std;
 
-const string line = "Oven.exe init run";
+const string line = "Oven.exe init";
 int targc;
 char **targv = make_argv(line, targc);
 
@@ -29,10 +28,7 @@ int main(int argc, char** argv)
 	catch (const CLI::ParseError&) { // using --help raises CallForHelp
 		return 0;
 	}
-	catch(const ArgumentSyntaxError& error) {
-		cout << error;
-		return error.checksum;
-	}
+	args->working_directory = filesystem::path("C:\\Bua_testsite");
 
 	Program program(*args, bua_path);
 

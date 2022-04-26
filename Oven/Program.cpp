@@ -1,12 +1,17 @@
 #include "Program.h"
 #include "json.hpp"
-#include <fstream>
 #include "utils.h"
+#include "VerbInit.h"
+#include <fstream>
 
 Program::Program(const Arguments& args,
 				 const filesystem::path home) :
 	home{home}
 {
+	if (args.init->parsed()) {
+		verb::init(args);
+	}
+	
 	//// TODO load in separate function / make a Configuration class
 	//using namespace nlohmann; // json library
 	//ifstream config_file(home / "config.json");
