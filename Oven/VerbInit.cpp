@@ -5,17 +5,13 @@
 using namespace verb;
 namespace fs = filesystem;
 
-Init::Init(const Arguments& args) :
-	args{args}
+Init::Init(const Arguments& args) : Program(args)
 {
-	fs::copy(template_path, args.working_directory,
+	//template_path = get_template_path();
+	
+	/*fs::copy(template_path, args.working_directory,
 		  fs::copy_options::recursive 
-		| fs::copy_options::skip_existing);
-}
-
-fs::path verb::Init::get_template_path()
-{
-	return fs::path();
+		| fs::copy_options::skip_existing);*/
 }
 
 void Init::make_package_json()

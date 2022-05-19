@@ -1,20 +1,13 @@
 #include "Program.h"
 #include "json.hpp"
 #include "utils.h"
-#include "VerbInit.h"
-#include "VerbRun.h"
 #include <fstream>
 
-Program::Program(const Arguments& args)
-{
-	if (args.init->parsed()) {
-		verb::Init a(args);
-	}
+namespace fs = std::filesystem;
 
-	if (args.run->parsed()) {
-		verb::run(args);
-	}
-	
+Program::Program(const Arguments& args) :
+	args{args}
+{	
 	//// TODO load in separate function / make a Configuration class
 	//using namespace nlohmann; // json library
 	//ifstream config_file(home / "config.json");
@@ -29,4 +22,20 @@ Program::Program(const Arguments& args)
 	//cout << config["breaking"];
 	//cout << config["breaking"].type_name();
 
+}
+
+fs::path Program::get_template_path()
+{
+	/*fs::path ret(args.home_directory);
+	ret /= "Lua/templates";
+	if (!fs::is_directory(ret)) {
+		throw CorruptedHome("No templates directory");
+	}
+	ret /= args.template_name;
+	if (!fs::is_directory(ret)) {
+		throw BadInput("Template does not exist: " + args.template_name);
+	}
+	return ret;*/
+
+	return fs::path();
 }

@@ -7,6 +7,9 @@ Arguments::Arguments(int argc, char** argv)
 {	
 	get_home_dir();
 	
+	//wszystko sie psuje bo CLI::App parsuje wszystko w destruktorze
+	// trzeba by zamienic glowny app na wskaznik i dopiero w
+	// destruktorze sie go pozbywac
 	CLI::App app{ "Bua oven" };
 
 	working_directory = filesystem::current_path();
@@ -17,8 +20,16 @@ Arguments::Arguments(int argc, char** argv)
 	init->add_option("-t,--template", template_name, "Template of the project");
 	
 	// Run
-	run = app.add_subcommand("run",  "Run")
-		->excludes(init);
+	run = app.add_subcommand("run", "Run");
+
+	if (run->parsed()) {
+		print("run");
+	}
+	if (init->parsed()) {
+		print("init");
+	}
+
+	
 
 	try {
 		(app).parse((argc), (argv));
@@ -26,6 +37,13 @@ Arguments::Arguments(int argc, char** argv)
 	catch (const CLI::ParseError& e) {
 		app.exit(e);
 		throw e;
+	}
+
+	if (run->parsed()) {
+		print("run");
+	}
+	if (init->parsed()) {
+		print("init");
 	}
 }
 

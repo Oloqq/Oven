@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Arguments.h" />
     <ClInclude Include="CLI11.hpp" />
+    <ClInclude Include="Exceptions.hpp" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="utils.h" />
