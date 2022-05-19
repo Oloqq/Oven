@@ -45,6 +45,13 @@ Arguments::Arguments(int argc, char** argv)
 	if (init->parsed()) {
 		print("init");
 	}
+
+	if (run->parsed()) {
+		print("run");
+	}
+	if (init->parsed()) {
+		print("init");
+	}
 }
 
 void Arguments::get_home_dir()

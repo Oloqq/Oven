@@ -23,19 +23,3 @@ Program::Program(const Arguments& args) :
 	//cout << config["breaking"].type_name();
 
 }
-
-fs::path Program::get_template_path()
-{
-	/*fs::path ret(args.home_directory);
-	ret /= "Lua/templates";
-	if (!fs::is_directory(ret)) {
-		throw CorruptedHome("No templates directory");
-	}
-	ret /= args.template_name;
-	if (!fs::is_directory(ret)) {
-		throw BadInput("Template does not exist: " + args.template_name);
-	}
-	return ret;*/
-
-	return fs::path();
-}

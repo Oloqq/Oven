@@ -10,7 +10,5 @@ public:
 
 protected:
 	const Arguments& args;
-
-	std::filesystem::path get_template_path();
 };
 

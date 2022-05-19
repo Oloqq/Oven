@@ -7,11 +7,13 @@ namespace fs = filesystem;
 
 Init::Init(const Arguments& args) : Program(args)
 {
-	//template_path = get_template_path();
+	template_path = get_template_path();
 	
-	/*fs::copy(template_path, args.working_directory,
+	fs::copy(template_path, args.working_directory,
 		  fs::copy_options::recursive 
-		| fs::copy_options::skip_existing);*/
+		| fs::copy_options::skip_existing);
+
+	LuaTemplateData template_config = read_template_config();
 }
 
 void Init::make_package_json()
@@ -30,4 +32,27 @@ void Init::make_package_json()
 	//cout << config["breaking"];
 	//cout << config["breaking"].type_name();
 
+}
+
+
+
+fs::path Init::get_template_path()
+{
+	fs::path ret(args.home_directory);
+	ret /= "Lua/templates";
+	if (!fs::is_directory(ret)) {
+		throw CorruptedHome("No templates directory");
+	}
+	ret /= args.template_name;
+	if (!fs::is_directory(ret)) {
+		throw BadInput("Template does not exist: " + args.template_name);
+	}
+	return ret;
+
+	return fs::path();
+}
+
+LuaTemplateData verb::Init::read_template_config()
+{	
+	return LuaTemplateData(template_path / "__template.json");
 }
