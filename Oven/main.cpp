@@ -28,27 +28,15 @@ int main(int argc, char** argv)
 	// temp override
 	args->working_directory = filesystem::path("C:\\Bua_testsite");
 	print("Parsed arguments");
-
-	//if (args->run->parsed()) {
-	//	throw NotImplemented("run not implemented");
-	//	/*print("run");
-	//	verb::run(*args);*/
-	//}
-	if (args->init->parsed()) {
-		print("init");
-		verb::Init a(*args);
-	}
+	// end temp
 
 	try {
-		//if (args->run->parsed()) {
-		//	throw NotImplemented("run not implemented");
-		//	/*print("run");
-		//	verb::run(*args);*/
-		//}
-		//if (args->init->parsed()) {
-		//	print("init");
-		//	verb::Init a(*args);
-		//}
+		if (args->run->parsed()) {
+			throw NotImplemented("run not implemented");
+		}
+		if (args->init->parsed()) {
+			verb::Init a(*args);
+		}
 	}
 	catch (const CorruptedHome& e) {
 		cout << e.what();
@@ -63,6 +51,6 @@ int main(int argc, char** argv)
 		return 2;
 	}
 
-	//delete args;
+	delete args;
 	return 0;
 }

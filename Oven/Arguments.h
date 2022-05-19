@@ -11,6 +11,7 @@ class Arguments
 {
 public:
 	Arguments(int argc, char** argv);
+	~Arguments();
 
 	filesystem::path working_directory;
 	filesystem::path home_directory;
@@ -29,6 +30,8 @@ public:
 	};
 private:
 	void get_home_dir();
+
+	CLI::App* app;
 };
 
  
