@@ -13,7 +13,7 @@ Init::Init(const Arguments& args) : Program(args)
 		  fs::copy_options::recursive 
 		| fs::copy_options::skip_existing);
 
-	LuaTemplateData template_config = read_template_config();
+	LuaTemplateData template_cfg = read_template_config();
 }
 
 void Init::make_package_json()
