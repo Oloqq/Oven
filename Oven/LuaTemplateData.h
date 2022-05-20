@@ -9,18 +9,19 @@ using Version = string;
 
 class LuaTemplateData
 {
+public:
 	class Dependency
 	{
-		const static Version newest;
 	public:
+		const static Version newest_version;
+
 		string name;
 		Version version;
 	};
 
-public:
 	LuaTemplateData(const filesystem::path& path);
 
-	filesystem::path lib_path;
+	filesystem::path lib_rel_path;
 	vector<Dependency> dependencies;
 };
 

@@ -1,5 +1,6 @@
 #include "VerbInit.h"
 #include "json.hpp"
+#include "utils.h"
 #include <filesystem>
 
 using namespace verb;
@@ -13,7 +14,7 @@ Init::Init(const Arguments& args) : Program(args)
 		  fs::copy_options::recursive 
 		| fs::copy_options::skip_existing);
 
-	LuaTemplateData template_cfg = read_template_config();
+	manage_dependencies();
 }
 
 void Init::make_package_json()
@@ -52,7 +53,30 @@ fs::path Init::get_template_path()
 	return fs::path();
 }
 
-LuaTemplateData verb::Init::read_template_config()
+void verb::Init::manage_dependencies()
 {	
-	return LuaTemplateData(template_path / "__template.json");
+	LuaTemplateData template_cfg = LuaTemplateData(template_path / "__template.json");
+	fs::path srcdir = args.home_directory / "Lua/lib";
+	fs::path dstdir = args.working_directory / template_cfg.lib_rel_path;
+
+	fs::path source;
+	string filename;
+	for (auto& dep : template_cfg.dependencies) {
+		filename = dep.name + ".lua";
+		if (dep.version == LuaTemplateData::Dependency::newest_version) {
+			source = srcdir / filename;
+		}
+		else {
+			source = srcdir / ("v" + dep.version + " " + filename);
+		}
+		source = srcdir / filename;
+		if (fs::exists(source)) {
+			fs::copy(source, dstdir / filename,
+				fs::copy_options::overwrite_existing);
+		}
+		else {
+			print("Couldn't find dependency:", source.generic_string());
+		}
+
+	}
 }

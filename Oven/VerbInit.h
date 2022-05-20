@@ -16,8 +16,8 @@ namespace verb
 
 	private:
 		void make_package_json();
+		void manage_dependencies();
 		std::filesystem::path get_template_path();
-		LuaTemplateData read_template_config();
 
 		fs::path template_path;
 	};
